@@ -2,6 +2,6 @@
 
 Learning how to make an interpreter in zig.
 
-### Reference
+## Reference
 
 **Writing an Interpreter in Go** by Thorsten Ball
