@@ -45,8 +45,7 @@ pub fn nextToken(self: *Self) Token {
                 break :blk Token{ .type = TokenType.BANG, .literal = "!" };
             }
         },
-        inline '+', '-', '/', '*', '<', '>', ';', ',', '{', '}', '(', ')' => |ch| newToken(ch),
-        0 => Token{ .type = TokenType.EOF, .literal = "" },
+        inline '+', '-', '/', '*', '<', '>', ';', ',', '{', '}', '(', ')', 0 => |ch| newToken(ch),
         else => {
             if (isLetter(self.ch)) {
                 const literal = self.readIdentifier();
@@ -124,6 +123,7 @@ fn newToken(comptime ch: u8) Token {
         '}' => .{ .type = TokenType.RBRACE, .literal = "}" },
         '(' => .{ .type = TokenType.LPAREN, .literal = "(" },
         ')' => .{ .type = TokenType.RPAREN, .literal = ")" },
+        0 => .{ .type = TokenType.EOF, .literal = "" },
         else => @compileError(std.fmt.comptimePrint("Given token `{c}` is not valid", .{ch})),
     };
 }
